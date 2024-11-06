@@ -8,7 +8,7 @@ import EditarReservacion from "@/views/EditarReservacion.vue";
 const routes = [
     { path: '/', name: 'Home', component: Home },
     { path: '/reservaciones', name: 'Reservaciones', component: Reservaciones },
-    { path: '/reservaciones/crear', name: 'CrearReservacion', component: CrearReservacion },
+    { path: '/crear-reservacion', name: 'CrearReservacion', component: CrearReservacion },
     { path: '/editar-reservacion/:id', name: 'EditarReservacion', component: EditarReservacion, props: true },
     { path: '/tipos-servicio', name: 'TiposServicio', component: TiposServicio },
 ];

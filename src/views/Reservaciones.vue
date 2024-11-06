@@ -32,8 +32,8 @@
               <tr v-for="reservacion in reservaciones" :key="reservacion.id">
                 <td>{{ reservacion.id }}</td>
                 <td>{{ reservacion.nombre_cliente }}</td>
-                <td>{{ reservacion.fecha }}</td>
-                <td>{{ reservacion.hora }}</td>
+                <td>{{ formatFecha(reservacion.fecha) }}</td>
+                <td>{{ formatHora(reservacion.hora) }}</td>
                 <td>{{ reservacion.numero_personas }}</td>
                 <td>
                   <button class="btn btn-warning btn-sm" @click="editarReservacion(reservacion.id)">Editar</button>
@@ -59,6 +59,14 @@ export default {
     };
   },
   methods: {
+    formatFecha(fecha) {
+      if (!fecha) return "";
+      return new Date(fecha).toLocaleDateString();
+    },
+    formatHora(hora) {
+      if (!hora) return "";
+      return new Date(hora).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    },
     async fetchReservaciones() {
       try {
         const response = await api.get("/reservaciones");

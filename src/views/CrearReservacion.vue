@@ -1,4 +1,3 @@
-
 <template>
   <div class="container">
     <h1 class="mb-4">Crear Nueva Reservación</h1>
@@ -15,7 +14,7 @@
           </div>
           <div class="mb-3">
             <label for="hora" class="form-label">Hora</label>
-            <input type="text" id="hora" v-model="form.hora" class="form-control" required />
+            <input type="time" id="hora" v-model="form.hora" class="form-control" required />
           </div>
           <div class="mb-3">
             <label for="numero_personas" class="form-label">Número de Personas</label>
@@ -30,35 +29,40 @@
 </template>
 
 <script>
-import api from "../services/api";
+import api from '@/services/api';
+import Swal from 'sweetalert2';
 
 export default {
+  name: 'CrearReservacion',
   data() {
     return {
       form: {
-        nombre_cliente: "",
-        fecha: "",
-        hora: "",
+        nombre_cliente: '',
+        fecha: '',
+        hora: '',
         numero_personas: 1,
       },
     };
   },
   methods: {
+
     async handleSubmit() {
       try {
-        await api.post("/reservaciones", this.form);
-        this.$router.push("/reservaciones"); // Redirigir a la lista de reservaciones después de guardar
+        await api.post('/reservaciones', this.form);
+        Swal.fire('Guardado', 'La reservación fue creada exitosamente', 'success');
+        this.$router.push('/reservaciones'); // Redirige a la lista de reservaciones después de guardar
       } catch (error) {
-        console.error("Error al crear la reservación:", error);
+        Swal.fire('Error', 'Hubo un problema al crear la reservación', 'error');
+        console.error('Error al crear la reservación:', error);
       }
     },
     cancelar() {
-      this.$router.push("/reservaciones");
+      this.$router.push('/reservaciones'); // Redirige a la lista de reservaciones si se cancela
     },
   },
 };
 </script>
 
 <style scoped>
-/* Add your styles here */
+/* Estilos adicionales si es necesario */
 </style>
